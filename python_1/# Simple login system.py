@@ -1,23 +1,24 @@
-# Simple login systemnno
-
 # Initialize an empty dictionary to store user credentials
 users = {}
 
 def welcome_message():
     print("Welcome to Passion 4 Fashion!")
 
+def get_input(prompt):
+    """Function to handle user input and avoid repetition."""
+    return input(prompt).strip()
+
 def create_account():
     while True:
-        username = input("Create a username: ")
+        username = get_input("Create a username: ")
         if username in users:
             print("Username already exists. Please choose a different username.")
         else:
             break
     
     while True:
-        password = input("Create a password: ")
-        
-        verify_password = input("Verify your password: ")
+        password = get_input("Create a password: ")
+        verify_password = get_input("Verify your password: ")
         
         if password == verify_password:
             users[username] = password
@@ -28,70 +29,62 @@ def create_account():
 
 def login():
     while True:
-        username = input("Enter your username: ")
-        password = input("Enter your password: ")
+        username = get_input("Enter your username: ")
+        password = get_input("Enter your password: ")
         
-        if username in users and users[username] == password:
+        if users.get(username) == password:
             print("Login successful!")
             return username
         else:
             print("Incorrect username or password. Please try again.")
 
+def display_options(items):
+    for index, item in enumerate(items):
+        print(f"{index + 1}. {item}")
+
+def choose_item(category, items):
+    print(f"\nSelect a {category}:")
+    display_options(items)
+    
+    while True:
+        choice = get_input(f"Enter the number of your choice (1-{len(items)}): ")
+        if choice.isdigit() and 1 <= int(choice) <= len(items):
+            return items[int(choice) - 1]
+        else:
+            print("Invalid choice. Please try again.")
+
 def outfit_picker():
-    # Define clothing items
-    tops = ['Red Tank Top', 'Pink Top', 'Black Top', 'Blue Top']
-    bottoms = ['Jeans', 'Skirt', 'Shorts', 'Sweats']
-    shoes = ['Sneakers', 'Heels', 'Flats', 'Boots']
-    accessories = ['Necklace', 'Glasses', 'Belt', 'Necklace']
+    clothing = {
+        'Top': ['Red Tank Top', 'Pink Top', 'Black Top', 'Blue Top'],
+        'Bottom': ['Jeans', 'Skirt', 'Shorts', 'Sweats'],
+        'Shoes': ['Sneakers', 'Heels', 'Flats', 'Boots'],
+        'Accessory': ['Necklace', 'Glasses', 'Belt', 'Bracelet']
+    }
 
-    def display_options(items):
-        for index, item in enumerate(items):
-            print(f"{index + 1}. {item}")
-
-    def choose_item(category, items):
-        print(f"\nSelect a {category}:")
-        display_options(items)
-        
-        while True:
-            choice = input(f"Enter the number of your choice (1-{len(items)}): ")
-            if choice.isdigit() and 1 <= int(choice) <= len(items):
-                return items[int(choice) - 1]
-            else:
-                print("Invalid choice. Please try again.")
-
-    # Allow user to select items
-    selected_top = choose_item('Top', tops)
-    selected_bottom = choose_item('Bottom', bottoms)
-    selected_shoes = choose_item('Shoes', shoes)
-    selected_accessory = choose_item('Accessory', accessories)
+    selected_outfit = {category: choose_item(category, items) for category, items in clothing.items()}
 
     # Display the selected outfit
     print("\nYour selected outfit:")
-    print(f"Top: {selected_top}")
-    print(f"Bottom: {selected_bottom}")
-    print(f"Shoes: {selected_shoes}")
-    print(f"Accessory: {selected_accessory}")
+    for category, item in selected_outfit.items():
+        print(f"{category}: {item}")
 
-    # Transition to the finished screen
-    finished_screen(selected_top, selected_bottom, selected_shoes, selected_accessory)
+    finished_screen(selected_outfit)
 
-def finished_screen(top, bottom, shoes, accessory):
+def finished_screen(selected_outfit):
     print("\n=== Outfit Complete! ===")
     print("Your character is all dressed up with the following:")
-    print(f"👕 Top: {top}")
-    print(f"👖 Bottom: {bottom}")
-    print(f"👟 Shoes: {shoes}")
-    print(f"🧢 Accessory: {accessory}")
-    print("\nThanks for using Passion 4 Fashion! You look Gorge!")
+    for category, item in selected_outfit.items():
+        print(f"👕 {category}: {item}")
+    print("\nThanks for using Passion 4 Fashion! You look gorge!")
 
 def start_screen(username):
     print(f"\nWelcome back, {username}! You are now in the Outfit Picker.")
-    input("Press Enter to continue to the Outfit Picker...")
+    get_input("Press Enter to continue to the Outfit Picker...")
 
 def main():
     welcome_message()
     
-    has_account = input("Do you already have an account? (yes/no): ").strip().lower()
+    has_account = get_input("Do you already have an account? (yes/no): ")
     
     if has_account == "yes":
         username = login()  # User logs in
