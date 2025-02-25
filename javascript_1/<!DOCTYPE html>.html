@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voices of Resilience</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>Voices of Resilience</h1>
+            <img src="logo.jpg" alt="Voices of Resilience Logo" width="150">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#documentary">The Documentary</a></li>
+                <li><a href="#aboutme">Filmmakers</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>About Voices of Resilience</h2>
+            <p>A project that gathers and shares patient stories about their health journeys, letting them take control by admitting their challenges and triumphs. This emphasizes empathy among healthcare providers and others.</p>
+            <p>To learn more about the project, visit our <a href="about.html" target="_blank">About</a> page.</p>
+        </section>
+
+        <section id="documentary">
+            <h2>The Documentary</h2>
+            <p>Watch the Voices of Resilience documentary here: <a href="link-to-documentary.mp4" target="_blank">Link to Documentary</a></p>
+        </section>
+
+        <section id="aboutme">
+            <h2>Filmmakers</h2>
+            <p>The Credits: </p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Hana Amezzane: <a href="mailto:hanafatuma@gmail.com">hanafatuma@gmail.com</a></p>
+        </section>
+
+        <section id="documentary-highlights">
+            <h3>Documentary Highlights</h3>
+            <ul>
+                <li>Patient Stories</li>
+                <li>Healthcare Challenges</li>
+                <li>Emphasizing Empathy</li>
+                <li>Real-life Triumphs</li>
+            </ul>
+        </section>
+
+        <section id="submit-story">
+            <h2>Share Your Story</h2>
+            <form id="storyForm">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required><br>
+
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required><br>
+
+                <label for="story">Your Story:</label><br>
+                <textarea id="story" name="story" rows="5" cols="50" required></textarea><br>
+
+                <input type="submit" value="Submit">
+            </form>
+            <p id="feedbackMessage"></p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Voices of Resilience. All rights reserved.</p>
+        <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        // Declare distinct data types: integer and string
+        let submissionCount = 0;  // Integer variable to track the number of submissions
+        let userFeedback = "";    // String variable for user feedback message
+
+        document.getElementById('storyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get user input values
+            var userName = document.getElementById('name').value;
+            var userEmail = document.getElementById('email').value;
+            var userStory = document.getElementById('story').value;
+
+            // Validate form fields
+            if (userName === '' || userEmail === '' || userStory === '') {
+                userFeedback = "Please fill out all fields!";  // String assignment for empty fields
+                document.getElementById('feedbackMessage').textContent = userFeedback;
+                document.getElementById('feedbackMessage').style.color = "red";
+            } else {
+                submissionCount++;  // Increment integer variable when a valid submission occurs
+                userFeedback = "Thank you for sharing your story! Total submissions: " + submissionCount;  // String feedback with submission count
+                document.getElementById('feedbackMessage').textContent = userFeedback;
+                document.getElementById('feedbackMessage').style.color = "green";
+                document.getElementById('storyForm').reset();
+            }
+        });
+    </script>
+
+</body>
+</html>
