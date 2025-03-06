@@ -69,7 +69,7 @@
 
                 <input type="submit" value="Submit">
             </form>
-            <p id="feedbackMessage"></p>
+            <p id="feedbackMessage"></p> <!-- Feedback message will appear here -->
         </section>
 
     </main>
@@ -79,35 +79,8 @@
         <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
     </footer>
 
+   
     <script src="script.js"></script>
-
-    <script>
-        // Declare distinct data types: integer and string
-        let submissionCount = 0;  // Integer variable to track the number of submissions
-        let userFeedback = "";    // String variable for user feedback message
-
-        document.getElementById('storyForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Get user input values
-            var userName = document.getElementById('name').value;
-            var userEmail = document.getElementById('email').value;
-            var userStory = document.getElementById('story').value;
-
-            // Validate form fields
-            if (userName === '' || userEmail === '' || userStory === '') {
-                userFeedback = "Please fill out all fields!";  // String assignment for empty fields
-                document.getElementById('feedbackMessage').textContent = userFeedback;
-                document.getElementById('feedbackMessage').style.color = "red";
-            } else {
-                submissionCount++;  // Increment integer variable when a valid submission occurs
-                userFeedback = "Thank you for sharing your story! Total submissions: " + submissionCount;  // String feedback with submission count
-                document.getElementById('feedbackMessage').textContent = userFeedback;
-                document.getElementById('feedbackMessage').style.color = "green";
-                document.getElementById('storyForm').reset();
-            }
-        });
-    </script>
 
 </body>
 </html>
