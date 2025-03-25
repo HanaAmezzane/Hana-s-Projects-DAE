@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voices of Resilience</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>Voices of Resilience</h1>
+            <img src="images/logo.jpg" alt="Voices of Resilience Logo" width="150">
+        </div>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>About Voices of Resilience</h2>
+            <p>A project that gathers and shares patient stories about their health journeys, letting them take control by admitting their challenges and triumphs.</p>
+        </section>
+
+        <section id="submit-story">
+            <h2>Share Your Story</h2>
+            <form id="storyForm">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required><br>
+
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required><br>
+
+                <label for="story">Your Story:</label><br>
+                <textarea id="story" name="story" rows="5" cols="50" required></textarea><br>
+
+                <input type="submit" value="Submit">
+            </form>
+            <p id="feedbackMessage"></p>
+        </section>
+
+        <section id="fetched-stories">
+            <h2>Recent Stories</h2>
+            <ul id="storyList">
+                <!-- Stories will be populated here via API -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Voices of Resilience. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
