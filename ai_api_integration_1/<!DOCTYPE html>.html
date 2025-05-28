@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voices of Resilience</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <div class="logo">
             <h1>Voices of Resilience</h1>
-            <img src="logo.jpg" alt="Voices of Resilience Logo" width="150" />
+            <img src="logo.jpg" alt="Voices of Resilience Logo" width="150">
         </div>
         <nav>
             <ul>
@@ -55,59 +55,21 @@
             </ul>
         </section>
 
-        <!-- User Authentication Section -->
-        <section id="auth">
-            <h2>User Authentication</h2>
-
-            <div id="signup-section">
-                <h3>Create Account</h3>
-                <input type="email" id="signup-email" placeholder="Email" required />
-                <input type="password" id="signup-password" placeholder="Password" required />
-                <button id="signup-button">Sign Up</button>
-                <p id="signup-message"></p>
-            </div>
-
-            <div id="login-section">
-                <h3>Login</h3>
-                <input type="email" id="login-email" placeholder="Email" required />
-                <input type="password" id="login-password" placeholder="Password" required />
-                <button id="login-button">Log In</button>
-                <p id="login-message"></p>
-            </div>
-
-            <div id="logout-section" style="display:none;">
-                <p>You are logged in!</p>
-                <button id="logout-button">Log Out</button>
-            </div>
-        </section>
-
-        <!-- Story Submission Section -->
         <section id="submit-story">
             <h2>Share Your Story</h2>
             <form id="storyForm">
                 <label for="name">Your Name:</label>
-                <input type="text" id="name" name="name" required /><br />
+                <input type="text" id="name" name="name" required><br>
 
                 <label for="email">Your Email:</label>
-                <input type="email" id="email" name="email" required /><br />
+                <input type="email" id="email" name="email" required><br>
 
-                <label for="story">Your Story:</label><br />
-                <textarea id="story" name="story" rows="5" cols="50" required></textarea><br />
+                <label for="story">Your Story:</label><br>
+                <textarea id="story" name="story" rows="5" cols="50" required></textarea><br>
 
-                <label for="media">Upload a photo or video (optional):</label>
-                <input type="file" id="media" name="media" accept="image/*,video/*" /><br />
-
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit">
             </form>
             <p id="feedbackMessage"></p>
-        </section>
-
-        <!-- **** Added Section for Displaying User Stories (Requirement 4) **** -->
-        <section id="user-stories">
-            <h2>Your Submitted Stories</h2>
-            <div id="stories-list">
-                <!-- User stories will be dynamically inserted here by your JS -->
-            </div>
         </section>
 
     </main>
@@ -117,7 +79,35 @@
         <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
     </footer>
 
-    <script type="module" src="script.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        // Declare distinct data types: integer and string
+        let submissionCount = 0;  // Integer variable to track the number of submissions
+        let userFeedback = "";    // String variable for user feedback message
+
+        document.getElementById('storyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get user input values
+            var userName = document.getElementById('name').value;
+            var userEmail = document.getElementById('email').value;
+            var userStory = document.getElementById('story').value;
+
+            // Validate form fields
+            if (userName === '' || userEmail === '' || userStory === '') {
+                userFeedback = "Please fill out all fields!";  // String assignment for empty fields
+                document.getElementById('feedbackMessage').textContent = userFeedback;
+                document.getElementById('feedbackMessage').style.color = "red";
+            } else {
+                submissionCount++;  // Increment integer variable when a valid submission occurs
+                userFeedback = "Thank you for sharing your story! Total submissions: " + submissionCount;  // String feedback with submission count
+                document.getElementById('feedbackMessage').textContent = userFeedback;
+                document.getElementById('feedbackMessage').style.color = "green";
+                document.getElementById('storyForm').reset();
+            }
+        });
+    </script>
 
 </body>
 </html>
